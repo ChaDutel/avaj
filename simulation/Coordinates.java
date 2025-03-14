@@ -2,8 +2,8 @@ package simulation;
 
 public class Coordinates {
     private int longitude;
-    int latitude;
-    int height;
+    private int latitude;
+    private int height;
 
     Coordinates(int p_longitude, int p_latitude, int p_height) {
         this.longitude = p_longitude;
