@@ -12,7 +12,7 @@ public class AircraftFactory {
         return instance;
     }
 
-    public static Flyable newAircraft(String p_type, String p_name, Coordinates p_coordinates) {
+    public Flyable newAircraft(String p_type, String p_name, Coordinates p_coordinates) {
         return switch (p_type.toLowerCase()) {
             case "baloon" -> new Baloon(1, p_name, p_coordinates);
             case "helicopter" -> new Helicopter(1, p_name, p_coordinates);

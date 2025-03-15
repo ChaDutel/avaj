@@ -1,9 +1,14 @@
 package simulation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Tower {
     private List<Flyable> observers;
+
+    Tower() {
+        this.observers = new ArrayList<Flyable>();
+    }
 
     public void register(Flyable p_flyable) {
         // to do : add security when 
