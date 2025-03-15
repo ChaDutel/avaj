@@ -1,7 +1,7 @@
 package simulation;
 
-public class Baloon extends Aircraft {
-    public Baloon(long p_id, String p_name, Coordinates p_coordinate) {
+public class JetPlane extends Aircraft {
+    public JetPlane(long p_id, String p_name, Coordinates p_coordinate) {
         super(p_id, p_name, p_coordinate);
     }
 
@@ -10,22 +10,21 @@ public class Baloon extends Aircraft {
         String weather = this.weatherTower.getWeather(coordinates);
         if (weather == "SUN")
         {
-            this.coordinates.changeLongitude(2);
-            this.coordinates.changeHeight(4);
+            this.coordinates.changeLatitude(10);
+            this.coordinates.changeHeight(2);
         }
         else if (weather == "RAIN")
         {
-            this.coordinates.changeHeight(-5);
+            this.coordinates.changeLatitude(5);
         }
         else if (weather == "FOG")
         {
-            this.coordinates.changeHeight(-3);
+            this.coordinates.changeLatitude(1);
         }
         else if (weather == "SNOW")
         {
-            this.coordinates.changeHeight(-15);
+            this.coordinates.changeHeight(-7);
         }
-        // else 
         System.out.println("update");
     }
 }

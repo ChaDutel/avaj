@@ -23,7 +23,20 @@ public class Coordinates {
     public int getHeight(){
         return this.height;
     }
-}
 
-// admnistratifpour batir convention indemniter logement et  verrouiller la date de debut
-// contrat d'aternance, convention, dates pour avril est bon pour reserver train, je vis avec quentin quand il rentre, il me faut sujet et tuteur pour editer la convention,  indemnite logement comme javais le stage comme logement 
+    public void changeLongitude(int number) {
+        this.longitude += number;
+    }
+
+    public void changeLatitude(int number) {
+        this.latitude += number;
+    }
+
+    public void changeHeight(int number) {
+        this.height += number;
+        if (this.height > 100)
+            this.height = 100;
+        else if (this.height < 0)
+            this.height = 0;
+    }
+}
