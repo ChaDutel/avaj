@@ -4,6 +4,7 @@ public class Main {
     public static void main(String[] args) {
         WeatherTower weatherTower = new WeatherTower();
         AircraftFactory aicraftFact = AircraftFactory.getInstance();
+
         String[][] str = {
             {"helicopter", "test1", "50", "50", "10"},
             {"baloon", "test2", "50", "50", "10"},
@@ -15,6 +16,10 @@ public class Main {
             Flyable baloon = aicraftFact.newAircraft(strings[0], strings[1], coordinates);
             baloon.registerTower(weatherTower);
             weatherTower.register(baloon);
+        }
+        int n = 10;
+        for (int i = 0; i < n; i++) {
+            weatherTower.changeWeather();
         }
     }
 }

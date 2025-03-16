@@ -13,18 +13,22 @@ public class Helicopter extends Aircraft {
         {
             this.coordinates.changeLongitude(10);
             this.coordinates.changeHeight(2);
+            System.out.println("Helicopter#" + this.name + "(" + this.id + "): Time for sunglasses");
         }
         else if (weather == "RAIN")
         {
             this.coordinates.changeLongitude(5);
+            System.out.println("Helicopter#" + this.name + "(" + this.id + "): I block the rain drops with my wings");
         }
         else if (weather == "FOG")
         {
             this.coordinates.changeLongitude(1);
+            System.out.println("Helicopter#" + this.name + "(" + this.id + "): I can't see mayday!");
         }
         else if (weather == "SNOW")
         {
             this.coordinates.changeHeight(-12);
+            System.out.println("Helicopter#" + this.name + "(" + this.id + "): That's soo pretty. Hope it doesn't break my wings");
         }
         System.out.println("update");
     }

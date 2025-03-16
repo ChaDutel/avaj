@@ -6,10 +6,7 @@ public class WeatherProvider {
     private static WeatherProvider instance;
     
     private WeatherProvider() {
-        this.weather[0] = "RAIN";
-        this.weather[1] = "FOG";
-        this.weather[2] = "SUN";
-        this.weather[3] = "SNOW";
+        this.weather = new String[] {"RAIN", "FOG", "SUN", "SNOW"};
     }
     
     public static WeatherProvider getInstance() {
