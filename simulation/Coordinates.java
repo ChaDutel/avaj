@@ -9,8 +9,6 @@ public class Coordinates {
         this.longitude = p_longitude;
         this.latitude = p_latitude;
         this.height = p_height;
-        System.out.println("Coordinates created");
-        // to do : crash when height < 1 && > 100
     }
 
     public int getLongitude() {

@@ -2,8 +2,11 @@ package simulation;
 
 public class AircraftFactory {
     private static AircraftFactory instance;
+    private static int id;
     
-    private AircraftFactory() {}
+    private AircraftFactory() {
+        id = 0;
+    }
     
     public static AircraftFactory getInstance() {
         if (instance == null) {
@@ -13,10 +16,11 @@ public class AircraftFactory {
     }
 
     public Flyable newAircraft(String p_type, String p_name, Coordinates p_coordinates) {
+        id++;
         return switch (p_type.toLowerCase()) {
-            case "baloon" -> new Baloon(1, p_name, p_coordinates);
-            case "helicopter" -> new Helicopter(1, p_name, p_coordinates);
-            case "jetplane" -> new JetPlane(1, p_name, p_coordinates);
+            case "baloon" -> new Baloon(id, p_name, p_coordinates);
+            case "helicopter" -> new Helicopter(id, p_name, p_coordinates);
+            case "jetplane" -> new JetPlane(id, p_name, p_coordinates);
             default -> throw new IllegalArgumentException("Unknown aircraft type: " + p_type);
         };
     }
