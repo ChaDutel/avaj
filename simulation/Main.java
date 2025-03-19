@@ -84,7 +84,7 @@ public class Main {
         try {
             if (args.length != 1)
             {
-                System.err.println("The program takes one and only one argument from the command line" + args.length);
+                System.err.println("The program takes one and only one argument from the command line");
                 return ;
             }
             if (getAndCheckFile(args) == false)
