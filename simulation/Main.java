@@ -11,29 +11,22 @@ public class Main {
     static String[][] str = new String[0][];
     static int simulationNumber;
 
-    static boolean getAndCheckFile(String[] args) {
-        if (args.length != 1)
-        {
-            System.err.println("The program takes one and only one argument from the command line" + args.length);
-            return false;
+    public static class InputFileException extends Exception {
+        public InputFileException(String message) {
+            super(message);
         }
+    }
+
+    static boolean getAndCheckFile(String[] args) throws InputFileException {
         Path configPath = Paths.get(args[0]);
         if (!Files.exists(configPath))
-        {
-            System.err.println("File does not exist");
-            return false;
-        }
+            throw new InputFileException("File does not exist");
         if (!Files.isRegularFile(configPath))
-        {
-            System.err.println(args[1] + "Not a regular file");
-            return false;
-        }
+            throw new InputFileException(args[1] + "Not a regular file");
         try {
             List<String> content = Files.readAllLines(configPath);
-            if (content.isEmpty() || !content.get(0).trim().matches("^\\d+$")) {
-                System.err.println("Error: First line must contain exactly one positive number");
-                return false;
-            }
+            if (content.isEmpty() || !content.get(0).trim().matches("^\\d+$"))
+                throw new InputFileException("Error: First line must contain exactly one positive number");
             List<String> ids = new ArrayList<>();
             boolean firstLoop = true;
             int i = 0;
@@ -51,22 +44,13 @@ public class Main {
                     str[i] = lineTab;
                 }
                 if (lineTab.length != 5)
-                {
-                    System.err.println("Error: Excepected 5 arguments, got " + lineTab.length);
-                    return false;
-                }
+                    throw new InputFileException("Error: Excepected 5 arguments, got " + lineTab.length);
                 if (!lineTab[0].contains("Baloon") && !lineTab[0].contains("JetPlane") && !lineTab[0].contains("Helicopter"))
-                {
-                    System.err.println("Error: Invalid vehicule type " + lineTab[0]);
-                    return false;
-                }
+                    throw new InputFileException("Error: Invalid vehicule type " + lineTab[0]);
                 if (!ids.contains(lineTab[1]))
                     ids.add(lineTab[1]);
                 else
-                {
-                    System.err.println("Error Duplicate NAME-ID " + lineTab[1]);
-                    return false;
-                }
+                    throw new InputFileException("Error Duplicate NAME-ID " + lineTab[1]);
                 try
                 {
                     int num2 = Integer.parseInt(lineTab[2]);
@@ -74,30 +58,20 @@ public class Main {
                     int num4 = Integer.parseInt(lineTab[4]);
 
                     if (num2 < 0 || num3 < 0 || num4 < 0)
-                    {
-                        System.err.println("Error: longitude, latitude and height must be positive numbers: \"" + lineTab[0] + " " + lineTab[1] + "\"");
-                        return false;
-                    }
+                        throw new InputFileException("Error: longitude, latitude and height must be positive numbers: \"" + lineTab[0] + " " + lineTab[1] + "\"");
                     if (num4 == 0)
-                    {
-                        System.err.println("Error: the height must be 1 minimum to lanch the simulation for \"" + lineTab[0] + " " + lineTab[1] + "\"");
-                        return false;
-                    }
+                        throw new InputFileException("Error: the height must be 1 minimum to lanch the simulation for \"" + lineTab[0] + " " + lineTab[1] + "\"");
                     if (num4 > 100)
-                    {
-                        System.err.println("Error: Invalid height value: " + lineTab[4] + " for \"" + lineTab[0] + " " + lineTab[1] + "\". The height is in the 0-100 range");
-                        return false;
-                    }
+                        throw new InputFileException("Error: Invalid height value: " + lineTab[4] + " for \"" + lineTab[0] + " " + lineTab[1] + "\". The height is in the 0-100 range");
                 } catch (NumberFormatException e) {
-                    System.err.println("Error: latitude, longitude and height must be numbers");
-                    return false;
+                    throw new InputFileException("Error: latitude, longitude and height must be numbers " + e.getMessage());
                 }
                 i++;
             }
         }
         catch (Exception e)
         {
-            System.err.println(("Error reading file" + e.getMessage()));
+            throw new InputFileException(e.getMessage());
         }
         return true;
     }
@@ -106,12 +80,17 @@ public class Main {
         AircraftFactory aicraftFact = AircraftFactory.getInstance();
         
         try {
+            if (args.length != 1)
+            {
+                System.err.println("The program takes one and only one argument from the command line" + args.length);
+                return ;
+            }
             if (getAndCheckFile(args) == false)
             return ;
         }
-        catch (Exception e)
+        catch (InputFileException e)
         {
-            System.err.println(e);
+            System.err.println(e.getMessage());
             return ;
         }
         try {
@@ -154,5 +133,3 @@ public class Main {
         }
     }
 }
-
-//exceptions main

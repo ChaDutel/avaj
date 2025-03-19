@@ -10,13 +10,10 @@ public class Tower {
     }
 
     public void register(Flyable p_flyable) {
-        // to do : add security when 
         this.observers.add(p_flyable);
         Print.print(p_flyable.outPutStartLine() + " registered to weather tower");
     }
     public void unregister(Flyable p_flyable) {
-        // to do : add security when list is reading from outside
-        // try and catch if p_flyable not exists
         this.observers.remove(p_flyable);
         Print.print(p_flyable.outPutStartLine() + " unregistered from weather tower");
     }
