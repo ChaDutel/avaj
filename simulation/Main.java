@@ -35,6 +35,8 @@ public class Main {
                 if (firstLoop)
                 {
                     simulationNumber = Integer.parseInt(line);
+                    if (simulationNumber > 4242)
+                        throw new InputFileException("Error: the number of simulation is too big. Try under 4242");
                     firstLoop = false;
                     continue;
                 }
@@ -52,7 +54,7 @@ public class Main {
                 if (!ids.contains(lineTab[1]))
                     ids.add(lineTab[1]);
                 else
-                    throw new InputFileException("Error Duplicate NAME-ID " + lineTab[1]);
+                    throw new InputFileException("Error: Duplicate NAME-ID " + lineTab[1]);
                 try
                 {
                     int num2 = Integer.parseInt(lineTab[2]);
