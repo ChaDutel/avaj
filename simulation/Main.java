@@ -43,6 +43,8 @@ public class Main {
                 {
                     str[i] = lineTab;
                 }
+                if (line.isEmpty())
+                    continue;
                 if (lineTab.length != 5)
                     throw new InputFileException("Error: Excepected 5 arguments, got " + lineTab.length);
                 if (!lineTab[0].contains("Baloon") && !lineTab[0].contains("JetPlane") && !lineTab[0].contains("Helicopter"))
@@ -103,10 +105,7 @@ public class Main {
         }
         for (String[] strings : str) {
             if (strings == null)
-            {
-                System.err.println("Found null row in array!");
                 continue;
-            }
             try 
             {
                 Coordinates coordinates = new Coordinates(Integer.parseInt(strings[2]), Integer.parseInt(strings[3]), Integer.parseInt(strings[4]));
