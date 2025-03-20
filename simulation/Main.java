@@ -16,8 +16,13 @@ public class Main {
             super(message);
         }
     }
+    public static class AircraftException extends Exception {
+        public AircraftException(String message) {
+            super(message);
+        }
+    }
 
-    static boolean getAndCheckFile(String[] args) throws InputFileException {
+    static boolean getAndCheckFile(String[] args) throws InputFileException, AircraftException {
         Path configPath = Paths.get(args[0]);
         if (!Files.exists(configPath))
             throw new InputFileException("File does not exist");
@@ -50,7 +55,7 @@ public class Main {
                 if (lineTab.length != 5)
                     throw new InputFileException("Error: Excepected 5 arguments, got " + lineTab.length);
                 if (!lineTab[0].contains("Baloon") && !lineTab[0].contains("JetPlane") && !lineTab[0].contains("Helicopter"))
-                    throw new InputFileException("Error: Invalid vehicule type " + lineTab[0]);
+                    throw new AircraftException("Error: Invalid vehicule type " + lineTab[0]);
                 if (!ids.contains(lineTab[1]))
                     ids.add(lineTab[1]);
                 else
@@ -92,7 +97,7 @@ public class Main {
             if (getAndCheckFile(args) == false)
             return ;
         }
-        catch (InputFileException e)
+        catch (Exception e)
         {
             System.err.println(e.getMessage());
             return ;
